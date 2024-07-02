@@ -26,30 +26,40 @@ export function NuevoEmpleado() {
     };
 
     const nuevoEmpleadoPostApi = async () => {
-        const response = await fetch(`${appsettings.apiurl}Empleado/agregarempleado`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'aplication/json'
-            },
-            body: JSON.stringify(empleado)
-        })
-
-        if (response.ok) {
-            Swal.fire({
-                icon: "success",
-                title: "Save employed...",
-                showConfirmButton: false,
-                timer: 1500
+        try {
+            const response = await fetch(`${appsettings.apiurl}Empleado/agregarempleado`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(empleado)
             });
-            navigate('/')
-        } else {
+    
+            if (response.ok) {
+                Swal.fire({
+                    icon: "success",
+                    title: "Save employed...",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                navigate('/');
+            } else {
+                const errorMessage = await response.text(); // Intentar obtener el mensaje de error del cuerpo de la respuesta
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: errorMessage || "Something went wrong!"
+                });
+            }
+        } catch (error) {
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
-                text: "Something went wrong!"
+                text: `An error occurred: ${error}`
             });
         }
     }
+    
 
     return (
         <Container>

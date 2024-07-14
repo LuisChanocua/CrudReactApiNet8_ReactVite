@@ -101,8 +101,7 @@ export function EditarEmpleado() {
                     <hr></hr>
                     <Form>
                         <FormGroup>
-                            <Label>Id Empleado</Label>
-                            <Input type="number" name="idEmpleado" onChange={inputChangeValue} value={empleado.idEmpleado}></Input>
+                            <Input type="hidden" name="idEmpleado" onChange={inputChangeValue} value={empleado.idEmpleado}></Input>
                         </FormGroup>
                         <FormGroup>
                             <Label>Nombre</Label>
